@@ -19,7 +19,9 @@ sudo mount -o loop ~/lab_disks/backup.img /BACKUP
 ```
 
 Использование:
+```bash
 ./script.sh <LIMIT_PERCENT> <FILES_COUNT>
+```
 <LOG_DIR> - путь к разделу с логами (/LOG)
 <LIMIT_PERCENT> - порог заполнения раздела (например, 30)
 <FILES_COUNT> - количество файлов для архивации при превышении лимита
