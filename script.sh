@@ -1,6 +1,6 @@
 #!/bin/bash
 
-log_dir=$1
+log_dir="/LOG"
 limit=$2
 count=$3
 backup_dir="/BACKUP"
