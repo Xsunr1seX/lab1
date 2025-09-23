@@ -31,14 +31,18 @@ echo "Лимит был превышен, запуск архивации"
 files=$(ls -tr "$log_dir" |grep -v "lost+found" | head -n "$count")
 
 
-if [ ${#files[@]} -eq 0 ];then
+if [ -z "$files" ];then
 echo "Нет файлов для архивации"
 exit 1
 fi
 
-archive_size=$(du -cb "$log_dir"/$files | tail -1 | awk '{print $1}')
+archive_size=$(du -c --block-size=1 "$log_dir"/$files 2>/dev/null | tail -n1 | awk '{print $1}')
 
-free_space=$(df -B1 "$backup_dir" | awk 'N==2 {print $4}')
+free_space=$(df -B1 "$backup_dir" | awk 'NR==2 {print $4}')
+if [ -z "$archive_size" ] || [ -z "$free_space" ]; then
+echo "Ошибка: не удалось определить размер архива или свободное место"
+exit 1
+fi
 
 if [ "$archive_size" -ge "$free_space" ]; then
 echo "На разделе BACKUP недостаточно места для архива."
