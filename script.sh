@@ -1,9 +1,9 @@
 #!/bin/bash
 
-log_dir="/LOG"
-limit=$2
-count=$3
-backup_dir="/BACKUP"
+log_dir='/LOG'
+limit=$1
+count=$2
+backup_dir='/BACKUP'
 
 
 perc=$(df -h "$log_dir" | awk 'NR==2 {print $5}' | tr -d '%')
@@ -22,7 +22,8 @@ fi
 if ! mountpoint -q "$backup_dir"; then
 echo "не существует раздела $backup_dir"
 exit 1
-fi 
+fi
+
 
 
 if [ "$perc" -gt "$limit" ]; then
