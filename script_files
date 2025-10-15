@@ -7,7 +7,7 @@ i=0
 while [ $i -lt $count ]
 do
 
-	dd if=/dev/zero of=/LOG/testfile$i bs=1M count=20
+	dd if=/dev/zero of=/LOG/testfile$i bs=1M count=5
 	((i++))
 done
 
